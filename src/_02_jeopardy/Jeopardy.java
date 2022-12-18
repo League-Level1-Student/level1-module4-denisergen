@@ -26,8 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import game_tools.Sound;
-
-
 /* Check out the Jeopardy Handout to see what the end result should look like: http://bit.ly/1bvnvd4 */
 
 public class Jeopardy implements ActionListener {
@@ -45,33 +43,40 @@ public class Jeopardy implements ActionListener {
 	public void run() {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		quizPanel = new JPanel();
+		JPanel quizPanel = new JPanel();
 		frame.setLayout(new BorderLayout());
 
 		// 1. Make the frame show up
-
+		frame.setVisible(true);
 		// 2. Give your frame a title
-
+		frame.setTitle("jeopoerdgy");
 		// 3. Create a JPanel variable to hold the header using the createHeader method
-
+		JPanel panel = new JPanel();
+		panel.add(createHeader("topicName"));
 		// 4. Add the header component to the quizPanel
-
+		quizPanel.add(panel);
 		// 5. Add the quizPanel to the frame
-
+		frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton
-
+		firstButton = createButton("100");
+		quizPanel.add(firstButton);
+		secondButton = createButton("200");
+		quizPanel.add(secondButton);
+		thirdButton = createButton("300");
+		quizPanel.add(thirdButton);
 		// 7. Add the firstButton to the quizPanel
-
+		
 		// 8. Write the code to complete the createButton() method below. Check that your
 		// game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
-
+		
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
-
+		
 		// 10. Add the secondButton to the quizPanel
-
+		firstButton.addActionListener(this);
 		// 11. Add action listeners to the buttons (2 lines of code)
-
+		secondButton.addActionListener(this);
+		thirdButton.addActionListener(this);
 		// 12. Write the code to complete the actionPerformed() method below
 
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
@@ -92,14 +97,14 @@ public class Jeopardy implements ActionListener {
 	private JButton createButton(String dollarAmount) {
 		
 		// Create a new JButton
-
+		JButton dolla = new JButton();
 		// Set the text of the button to the dollarAmount
-
+		dolla.setText(dollarAmount);
 		// Increment the buttonCount (this should make the layout vertical)
-
+		buttonCount++;
 		// Return your new button instead of the temporary button
 
-		return new JButton("temporary button");
+		return dolla;
 	}
 
 	@Override
@@ -110,7 +115,11 @@ public class Jeopardy implements ActionListener {
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
-
+		if (buttonPressed == firstButton)
+		{
+		askQuestion("what has 2 feet and likes eating food", "human", 100);
+		
+		}
 			// Call the askQuestion() method
  
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
@@ -126,26 +135,33 @@ public class Jeopardy implements ActionListener {
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		
 		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
-		
+		playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+		String ans = JOptionPane.showInputDialog(null, "this is where the question will be asked");
 		
 		// Stop the theme music when they have entered their response.
-		
+		stopJeopardyTheme();
 		// If the answer is correct
-
+		if (ans .equals (correctAnswer))
+		{
+			stopJeopardyTheme();
+			score++;
+			updateScore();
+			
+			JOptionPane.showMessageDialog(null, "Pop up a message to tell the user they were correct");
+		}
 			// Increase the score by the prizeMoney
-
+		
 			// Pop up a message to tell the user they were correct
-
+		
 		// Otherwise
-
+		
 			// Decrement the score by the prizeMoney
-
+		
 			// Pop up a message to tell the user they were wrong and give them the correct answer
-
+		
 		// Call the updateScore() method
-
+		
 	}
 
 	public void playJeopardyTheme() {

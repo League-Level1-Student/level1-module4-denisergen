@@ -8,7 +8,7 @@ public class ChuckleClicker {
 	{
 		
 	JOptionPane.showMessageDialog(null, "ptok");
-	
+
 	
 	}
 	public static void main(String[] args) {
